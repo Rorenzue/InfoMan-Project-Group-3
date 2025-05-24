@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCIP Educational Assistance - Parent's Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/parentdesign.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="../assets/images/img_logo.png" alt="NCIP Logo" class="logo">
+        </a></a>
+        <div class="header-text">
+            <div class="registration-process">Registration Process</div>
+            <div class="main-title">NCIP Educational Assistance</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <ul>
+                <li>
+                    <span class="icon">👤</span>
+                    <span>Personal</span>
+                </li>
+                <li class="active">
+                    <span class="icon">👥</span>
+                    <span>Parent</span>
+                </li>
+                <li>
+                    <span class="icon">📄</span>
+                    <span>Educational<br>Background</span>
+                </li>
+                <li>
+                    <span class="icon">✎</span>
+                    <span>Degree<br>and School<br>Preference</span>
+                </li>
+                <li>
+                    <span class="icon">🔍</span>
+                    <span>View and<br>Submit</span>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="stepper">
+                <div class="step completed">
+                    <span class="checkmark">✓</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step active">2</div>
+                <div class="step-line"></div>
+                <div class="step">3</div>
+                <div class="step-line"></div>
+                <div class="step">4</div>
+                <div class="step-line"></div>
+                <div class="step">5</div>
+                <span class="step-label">Parent's Information</span>
+            </div>
+
+            <div class="form-card">
+                <form>
+                    <div class="form-row">
+                        <input type="text" placeholder="Full Name" required>
+                        <select required>
+                            <option value="" disabled selected>Educational Attainment</option>
+                            <option value="elementary">Elementary</option>
+                            <option value="highschool">High School</option>
+                            <option value="college">College</option>
+                            <option value="graduate">Graduate School</option>
+                        </select>
+                        <select required>
+                            <option value="" disabled selected>Ethnic Group</option>
+                            <option value="group1">Group 1</option>
+                            <option value="group2">Group 2</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" placeholder="Current Address" required>
+                        <select required>
+                            <option value="" disabled selected>Life Status</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                        <input type="text" placeholder="Primary Occupation" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" placeholder="Office Address">
+                        <select required>
+                            <option value="" disabled selected>Annual Income</option>
+                            <option value="below_50k">Below ₱50,000</option>
+                            <option value="50k_100k">₱50,000 - ₱100,000</option>
+                            <option value="100k_200k">₱100,000 - ₱200,000</option>
+                            <option value="above_200k">Above ₱200,000</option>
+                        </select>
+                        <input type="text" placeholder="ITR Year" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="back-btn" onclick="window.location.href='personaldesign.html'">Back</button>
+                        <button type="button" class="next-btn" onclick="window.location.href='educationaldesign.html'">Next</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

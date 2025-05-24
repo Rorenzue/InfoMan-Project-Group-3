@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCIP Educational Assistance - Personal Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/personaldesign.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="../assets/images/img_logo.png" alt="NCIP Logo" class="logo">
+        </a></a>
+        <div class="header-text">
+            <div class="registration-process">Registration Process</div>
+            <div class="main-title">NCIP Educational Assistance</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <ul>
+                <li class="active">
+                    <span class="icon">👤</span>
+                    <span>Personal</span>
+                </li>
+                <li>
+                    <span class="icon">👥</span>
+                    <span>Parent</span>
+                </li>
+                <li>
+                    <span class="icon">📄</span>
+                    <span>Educational<br>Background</span>
+                </li>
+                <li>
+                    <span class="icon">✎</span>
+                    <span>Degree<br>and School<br>Preference</span>
+                </li>
+                <li>
+                    <span class="icon">🔍</span>
+                    <span>View and<br>Submit</span>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="stepper">
+                <div class="step active">1</div>
+                <div class="step-line"></div>
+                <div class="step">2</div>
+                <div class="step-line"></div>
+                <div class="step">3</div>
+                <div class="step-line"></div>
+                <div class="step">4</div>
+                <div class="step-line"></div>
+                <div class="step">5</div>
+                <span class="step-label">Personal Information</span>
+            </div>
+
+            <div class="form-card">
+                <form>
+                    <div class="form-row">
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Middle Name" required>
+                        <input type="text" placeholder="Last Name" required>
+                        <input type="text" placeholder="Suffix (e.g.: III, Jr.)" class="suffix-input">
+                    </div>
+                    <div class="form-row">
+                        <input type="date" placeholder="Birth Date" required>
+                        <input type="text" placeholder="Birth Place" required>
+                        <select required>
+                            <option value="" disabled selected>Sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <select required>
+                            <option value="" disabled selected>Ethnic Group</option>
+                            <option value="group1">Group 1</option>
+                            <option value="group2">Group 2</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" placeholder="E-mail Address" required>
+                        <input type="text" placeholder="Contact Number" required>
+                        <input type="text" placeholder="DepEd LRN Number" required>
+                        <select required>
+                            <option value="" disabled selected>Civil Status</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="widowed">Widowed</option>
+                            <option value="separated">Separated</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" placeholder="Permanent Student Address" required>
+                        <input type="text" placeholder="Current Student Address" required>
+                    </div>
+                    <button type="button" class="next-btn" onclick="window.location.href='parentdesign.html'">Next</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
