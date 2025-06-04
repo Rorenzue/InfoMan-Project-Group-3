@@ -59,8 +59,8 @@ CREATE TABLE appli_profile (
   Suffix char(4) DEFAULT NULL,
   BirthDate date NOT NULL,
   BirthPlace char(30) NOT NULL,
-  Sex char(1) NOT NULL,
-  CivilStat char(1) NOT NULL,
+  Sex char(10) NOT NULL,
+  CivilStat char(15) NOT NULL,
   EthnoGroupStudent varchar(15) NOT NULL,
   ContactNo char(11) NOT NULL,
   EmailAdd varchar(40) NOT NULL,
@@ -123,7 +123,7 @@ DROP TABLE IF EXISTS educ_bg;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE educ_bg (
   LRN bigint NOT NULL,
-  Educ_Background char(3) NOT NULL,
+  Educ_Background char(10) NOT NULL,
   SchoolCode int NOT NULL,
   Year_Grad year NOT NULL,
   Ave_Grade float NOT NULL,
