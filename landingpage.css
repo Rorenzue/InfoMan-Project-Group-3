@@ -1,0 +1,659 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lexend', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            height: 108px;
+            background-color: #f1f1f1;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 65px;
+            height: 65px;
+        }
+        
+        .logo-text {
+            margin-left: 10px;
+        }
+        
+        .department {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 22px;
+            color: #6a6262;
+        }
+        
+        .commission {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 28px;
+            color: #202e48;
+        }
+        
+        .nav-links {
+            display: flex;
+            margin-left: auto;
+        }
+        
+        .nav-link {
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #1f2e48;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 600px;
+            background-color: #F6C74D;
+            padding: 60px 0;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .hero-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            line-height: 1.2;
+            color: #17253F;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #3B4158;
+        }
+        
+        .hero-text .highlight {
+            font-weight: 600;
+            color: #17253F;
+        }
+        
+        .hero-illustration {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-image {
+            max-width: 500px;
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 3;
+        }
+        
+        .slider-arrow {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .slider-arrow:hover {
+            transform: scale(1.1);
+        }
+        
+        .slider-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: #FFFFFF;
+        }
+        
+        .eligibility-section {
+            padding: 60px 0;
+            background-color: #FBE18F;
+        }
+        
+        .eligibility-section .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .eligibility-section .section-title {
+            color: #1B2A4A;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Lexend', sans-serif;
+            text-align: center;
+        }
+        
+        .eligibility-section .section-subtitle {
+            color: #1B2A4A;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+
+        .section-header {
+            text-align: center;
+        }
+        
+        .eligibility-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .eligibility-card {
+            background-color: #1B2A4A;
+            border-radius: 12px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+        }
+        
+        .eligibility-card .icon-container {
+            background-color: #2D3C5E;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .eligibility-card .card-icon {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .eligibility-card h3 {
+            font-family: 'Lexend', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .eligibility-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .requirements-section {
+            padding: 60px 0;
+            background-color: #1B2A4A;
+        }
+        
+        .requirements-section .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .requirements-section .section-title {
+            color: #FFFFFF;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Lexend', sans-serif;
+        }
+        
+        .requirements-section .section-subtitle {
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .requirement-card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .requirement-card .icon-container {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .requirement-card .req-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .requirement-card h3 {
+            color: #1B2A4A;
+            font-size: 1.25rem;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+        }
+        
+        .requirement-card p {
+            color: #666666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .process-section {
+            padding: 66px 0;
+            background-color: #17253F;
+        }
+        
+        .process-section .section-title,
+        .process-section .section-subtitle {
+            color: #ffffff;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+            position: relative;
+            gap: 20px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background-color: #C4C4C4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #17253F;
+            font-weight: 500;
+        }
+        
+        .step-item.active .step-number {
+            background-color: #F6C74D;
+        }
+        
+        .step-line {
+            width: 100px;
+            height: 2px;
+            background-color: #C4C4C4;
+            margin: 0 10px;
+        }
+        
+        .step-item:last-child .step-line {
+            display: none;
+        }
+        
+        .process-content {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+        
+        .content-title {
+            font-size: 32px;
+            color: #17253F;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .content-description {
+            font-size: 18px;
+            color: #3B4158;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        
+        .next-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #17253F;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .next-button:hover {
+            background-color: #2a3b5f;
+        }
+        
+        .register-box {
+            position: relative;
+            width: 226px;
+            height: 173px;
+            border: 1px solid #9747ff;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reminders-section {
+            padding: 66px 0;
+            background-color: #ffffff;
+            position: relative;
+        }
+        
+        .reminders-container {
+            max-width: 1354px;
+            margin: 0 auto;
+            padding: 34px 43px;
+            background-color: #17253f;
+            border-radius: 35px;
+            box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+        }
+        
+        .reminders-title {
+            color: #f8f8f8;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .reminders-subtitle {
+            color: #f8f8f8;
+            opacity: 0.86;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .reminders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .reminder-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .register-section {
+            padding: 66px 0;
+            background-color: #F6C74D;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-content {
+            max-width: 1354px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .register-illustration {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .student-girl, .student-boy {
+            height: 300px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .register-button-container {
+            margin: 0 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .apply-button {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #333;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .apply-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-card {
+                margin-bottom: 40px;
+                max-width: 100%;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-image {
+                max-width: 400px;
+            }
+            
+            .eligibility-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+            
+            .hero-card {
+                padding: 30px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-text {
+                font-size: 16px;
+            }
+            
+            .hero-image {
+                max-width: 300px;
+            }
+            
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+            }
+            
+            .nav-links {
+                margin: 20px 0 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                margin: 5px 10px;
+            }
+            
+            .reminders-container {
+                padding: 20px;
+                margin: 0 15px;
+            }
+            
+            .reminder-item {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .register-illustration {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .student-girl, .student-boy {
+                height: 200px;
+            }
+            
+            .register-button-container {
+                margin: 20px 0;
+            }
+            
+            .apply-button {
+                padding: 12px 25px;
+                font-size: 18px;
+            }
+            
+            .process-section {
+                margin: 0 10px;
+                padding: 40px 0;
+            }
+            
+            .process-steps {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .step-line {
+                width: 50px;
+            }
+            
+            .process-content {
+                margin: 0 20px;
+                padding: 30px 20px;
+            }
+            
+            .content-title {
+                font-size: 24px;
+            }
+            
+            .content-description {
+                font-size: 16px;
+            }
+            
+            .eligibility-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .eligibility-section .section-container {
+                padding: 0 15px;
+            }
+            
+            .requirements-grid {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            
+            .requirement-card {
+                padding: 20px;
+            }
+        }
