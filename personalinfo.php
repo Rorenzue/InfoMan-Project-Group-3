@@ -99,8 +99,8 @@ if (isset($_POST["next"])) {
                         value="<?= isset($_SESSION['BirthPlace']) ? htmlspecialchars($_SESSION['BirthPlace']) : '' ?>">
                     <select name="Sex" required>
                         <option value="" selected disabled hidden >Sex</option>
-                        <option value="male" <?= (isset($_SESSION['Sex']) && $_SESSION['Sex'] === 'male') ? 'selected' : '' ?>>Male</option>
-                        <option value="female" <?= (isset($_SESSION['Sex']) && $_SESSION['Sex'] === 'female') ? 'selected' : '' ?>>Female</option>
+                        <option value="M" <?= (isset($_SESSION['Sex']) && $_SESSION['Sex'] === 'M') ? 'selected' : '' ?>>Male</option>
+                        <option value="F" <?= (isset($_SESSION['Sex']) && $_SESSION['Sex'] === 'F') ? 'selected' : '' ?>>Female</option>
                     </select>
                     <select name="EthnoGroupStudent" required>
                         <option value="" selected disabled hidden >Ethnic Group</option>
@@ -117,10 +117,10 @@ if (isset($_POST["next"])) {
                         value="<?= isset($_SESSION['LRN']) ? htmlspecialchars($_SESSION['LRN']) : '' ?>">
                     <select name="CivilStat" required>
                         <option value="" selected disabled hidden >Civil Status</option>
-                        <option value="single" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'single') ? 'selected' : '' ?>>Single</option>
-                        <option value="married" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'married') ? 'selected' : '' ?>>Married</option>
-                        <option value="widowed" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'widowed') ? 'selected' : '' ?>>Widowed</option>
-                        <option value="separated" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'separated') ? 'selected' : '' ?>>Separated</option>
+                        <option value="S" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'S') ? 'selected' : '' ?>>Single</option>
+                        <option value="M" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'M') ? 'selected' : '' ?>>Married</option>
+                        <option value="W" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'W') ? 'selected' : '' ?>>Widowed</option>
+                        <option value="X" <?= (isset($_SESSION['CivilStat']) && $_SESSION['CivilStat'] === 'X') ? 'selected' : '' ?>>Separated</option>
                     </select>
                 </div>
                 <div class="form-row">

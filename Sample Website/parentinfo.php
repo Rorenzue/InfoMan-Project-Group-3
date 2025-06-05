@@ -17,7 +17,6 @@ if(isset($_POST["back"])) {
 }
 
 if(isset($_POST["next1"])) {
-    echo "Button Clicked";
     $_SESSION["ParentName"] = $_POST["ParentName"];
     $_SESSION["ParentEduc"] = $_POST["ParentEduc"];
     $_SESSION["EthnoGroupPrt"] = $_POST["EthnoGroupPrt"];
