@@ -73,7 +73,7 @@ CREATE TABLE appli_profile (
   ParentOfficeAdd varchar(60) DEFAULT NULL,
   ParentEduc char(10) NOT NULL,
   EthnoGroupPrt varchar(15) NOT NULL,
-  Parent_Income ENUM('below_50k', '50k_100k', '100k_200k', 'above_200k') NOT NULL,
+  Parent_Income varchar(10) NOT NULL,
   ITR_Year year NOT NULL,
   PRIMARY KEY (LRN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
