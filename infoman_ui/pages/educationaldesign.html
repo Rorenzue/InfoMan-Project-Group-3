@@ -64,6 +64,18 @@
             <div class="form-card">
                 <p class="required-text">Fields marked with a red asterisk (<span class="required">*</span>) are required.</p>
                 <form>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <select id="assistanceType" required>
+                                <option value="" disabled selected>Assistance Applied</option>
+                                <option value="college">College</option>
+                                <option value="masters">Master's</option>
+                                <option value="phd">PhD/Doctorate</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+
                     <!-- Elementary School -->
                     <div class="form-row">
                         <div class="form-group">
@@ -120,6 +132,84 @@
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" placeholder="Senior High School" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="1900" max="2099" placeholder="Year Graduated" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="75" max="100" step="0.01" placeholder="Average Grade" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="" disabled selected>Rank</option>
+                                <option value="highest">With Highest Honors</option>
+                                <option value="high">With High Honors</option>
+                                <option value="honors">With Honors</option>
+                                <option value="na">N/A</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+
+                    <!-- College (Undergraduate) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="College (Undergraduate)" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="1900" max="2099" placeholder="Year Graduated" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="75" max="100" step="0.01" placeholder="Average Grade" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="" disabled selected>Rank</option>
+                                <option value="highest">With Highest Honors</option>
+                                <option value="high">With High Honors</option>
+                                <option value="honors">With Honors</option>
+                                <option value="na">N/A</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+
+                    <!-- Master's Degree -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Master's Degree" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="1900" max="2099" placeholder="Year Graduated" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="75" max="100" step="0.01" placeholder="Average Grade" required>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="" disabled selected>Rank</option>
+                                <option value="highest">With Highest Honors</option>
+                                <option value="high">With High Honors</option>
+                                <option value="honors">With Honors</option>
+                                <option value="na">N/A</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+
+                    <!-- PhD/Doctorate -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="PhD/Doctorate" required>
                             <span class="required">*</span>
                         </div>
                         <div class="form-group">
