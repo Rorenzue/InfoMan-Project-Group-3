@@ -87,7 +87,7 @@ body {
     align-items: center;
     margin-bottom: 32px;
     position: relative;
-    padding-right: 50px;
+    padding-right: 140px;
 }
 
 .step {
@@ -125,9 +125,10 @@ body {
 
 .step-label {
     position: absolute;
-    right: -140px;
+    right: -100px;
     color: #1B2A4A;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .form-card {
