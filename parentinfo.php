@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-if(isset($_POST["back"])) {
+if(isset($_POST["back"]) || isset($_POST["next1"])) {
     $_SESSION["ParentName"] = $_POST["ParentName"];
     $_SESSION["ParentEduc"] = $_POST["ParentEduc"];
     $_SESSION["EthnoGroupPrt"] = $_POST["EthnoGroupPrt"];
@@ -12,23 +11,13 @@ if(isset($_POST["back"])) {
     $_SESSION["Parent_Income"] = $_POST["Parent_Income"];
     $_SESSION["ITR_Year"] = $_POST["ITR_Year"];
 
-    header("Location: personalinfo.php");
-    exit();
-}
-
-if(isset($_POST["next1"])) {
-    $_SESSION["ParentName"] = $_POST["ParentName"];
-    $_SESSION["ParentEduc"] = $_POST["ParentEduc"];
-    $_SESSION["EthnoGroupPrt"] = $_POST["EthnoGroupPrt"];
-    $_SESSION["Parent_Add"] = $_POST["Parent_Add"];
-    $_SESSION["PLifeStatus"] = $_POST["PLifeStatus"];
-    $_SESSION["ParentPrimaryOccu"] = $_POST["ParentPrimaryOccu"];
-    $_SESSION["ParentOfficeAdd"] = $_POST["ParentOfficeAdd"];
-    $_SESSION["Parent_Income"] = $_POST["Parent_Income"];
-    $_SESSION["ITR_Year"] = $_POST["ITR_Year"];
-
-    header("Location: educbackground.php");
-    exit();
+    if (isset($_POST["next1"])) {
+        header("Location: educbackground.php");
+        exit();
+    } elseif (isset($_POST["back"])) {
+        header("Location: personalinfo.php");
+        exit();
+    }
 }
 ?>
 
@@ -101,16 +90,16 @@ if(isset($_POST["next1"])) {
 
                         <select name="ParentEduc" required>
                             <option value="" disabled selected hidden <?= isset($_SESSION['ParentEduc']) ? 'selected' : '' ?>>Educational Attainment</option>
-                            <option value="elementary" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'elementary') ? 'selected' : '' ?>>Elementary</option>
-                            <option value="highschool" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'highschool') ? 'selected' : '' ?>>High School</option>
-                            <option value="college" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'college') ? 'selected' : '' ?>>College</option>
-                            <option value="graduate" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'graduate') ? 'selected' : '' ?>>Graduate School</option>
+                            <option value="Elementary" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'Elementary') ? 'selected' : '' ?>>Elementary</option>
+                            <option value="Highschool" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'Highschool') ? 'selected' : '' ?>>High School</option>
+                            <option value="College" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'College') ? 'selected' : '' ?>>College</option>
+                            <option value="Graduate" <?= (isset($_SESSION['ParentEduc']) && $_SESSION['ParentEduc'] === 'Graduate') ? 'selected' : '' ?>>Graduate School</option>
                         </select>
 
                         <select name="EthnoGroupPrt" required>
                             <option value="" disabled selected hidden <?= isset($_SESSION['EthnoGroupPrt']) ? 'selected' : '' ?>>Ethnic Group</option>
-                            <option value="group1" <?= (isset($_SESSION['EthnoGroupPrt']) && $_SESSION['EthnoGroupPrt'] === 'group1') ? 'selected' : '' ?>>Group 1</option>
-                            <option value="group2" <?= (isset($_SESSION['EthnoGroupPrt']) && $_SESSION['EthnoGroupPrt'] === 'group2') ? 'selected' : '' ?>>Group 2</option>
+                            <option value="Group1" <?= (isset($_SESSION['EthnoGroupPrt']) && $_SESSION['EthnoGroupPrt'] === 'Group1') ? 'selected' : '' ?>>Group 1</option>
+                            <option value="Group2" <?= (isset($_SESSION['EthnoGroupPrt']) && $_SESSION['EthnoGroupPrt'] === 'Group2') ? 'selected' : '' ?>>Group 2</option>
                         </select>
                     </div>
 
@@ -121,8 +110,8 @@ if(isset($_POST["next1"])) {
 
                         <select name="PLifeStatus" required>
                             <option value="" disabled selected hidden <?= isset($_SESSION['PLifeStatus']) ? 'selected' : '' ?>>Life Status</option>
-                            <option value="living" <?= (isset($_SESSION['PLifeStatus']) && $_SESSION['PLifeStatus'] === 'living') ? 'selected' : '' ?>>Living</option>
-                            <option value="deceased" <?= (isset($_SESSION['PLifeStatus']) && $_SESSION['PLifeStatus'] === 'deceased') ? 'selected' : '' ?>>Deceased</option>
+                            <option value="Living" <?= (isset($_SESSION['PLifeStatus']) && $_SESSION['PLifeStatus'] === 'Living') ? 'selected' : '' ?>>Living</option>
+                            <option value="Deceased" <?= (isset($_SESSION['PLifeStatus']) && $_SESSION['PLifeStatus'] === 'Deceased') ? 'selected' : '' ?>>Deceased</option>
                         </select>
 
                         <input type="text" name="ParentPrimaryOccu" placeholder="Primary Occupation" required
@@ -135,10 +124,10 @@ if(isset($_POST["next1"])) {
 
                         <select name="Parent_Income" required>
                             <option value="" disabled selected hidden <?= isset($_SESSION['Parent_Income']) ? 'selected' : '' ?>>Annual Income</option>
-                            <option value="below_50k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === 'below_50k') ? 'selected' : '' ?>>Below ₱50,000</option>
+                            <option value="Below_50k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === 'Below_50k') ? 'selected' : '' ?>>Below ₱50,000</option>
                             <option value="50k_100k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === '50k_100k') ? 'selected' : '' ?>>₱50,000 - ₱100,000</option>
                             <option value="100k_200k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === '100k_200k') ? 'selected' : '' ?>>₱100,000 - ₱200,000</option>
-                            <option value="above_200k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === 'above_200k') ? 'selected' : '' ?>>Above ₱200,000</option>
+                            <option value="Above_200k" <?= (isset($_SESSION['Parent_Income']) && $_SESSION['Parent_Income'] === 'Above_200k') ? 'selected' : '' ?>>Above ₱200,000</option>
                         </select>
 
                         <input type="text" name="ITR_Year"placeholder="ITR Year" required
