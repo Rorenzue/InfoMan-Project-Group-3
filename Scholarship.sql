@@ -25,9 +25,8 @@ DROP TABLE IF EXISTS appli_details;
 CREATE TABLE appli_details (
   Appli_Num int NOT NULL AUTO_INCREMENT,
   LRN bigint NOT NULL,
-  Assistance_Type char(15) NOT NULL DEFAULT 'Regular',
-  Assistance_Applied varchar(15) NOT NULL DEFAULT 'PHD',
-  appli_detailscol varchar(45) NOT NULL,
+  Assistance_Type char(15) NOT NULL,
+  Assistance_Applied varchar(15) NOT NULL,
   PRIMARY KEY (Appli_Num),
   UNIQUE KEY Appli_Num_UNIQUE (Appli_Num),
   KEY LRN_idx (LRN),
@@ -59,21 +58,21 @@ CREATE TABLE appli_profile (
   Suffix char(4) DEFAULT NULL,
   BirthDate date NOT NULL,
   BirthPlace char(30) NOT NULL,
-  Sex char(1) NOT NULL,
-  CivilStat char(1) NOT NULL,
+  Sex char(10) NOT NULL,
+  CivilStat char(15) NOT NULL,
   EthnoGroupStudent varchar(15) NOT NULL,
-  ContactNo char(11) NOT NULL,
+  ContactNo char(12) NOT NULL,
   EmailAdd varchar(40) NOT NULL,
-  Perma_Stud_Add varchar(60) NOT NULL,
-  Current_Stud_Add varchar(60) NOT NULL,
+  Perma_Stud_Add varchar(100) NOT NULL,
+  Current_Stud_Add varchar(100) NOT NULL,
   PLifeStatus char(10) NOT NULL,
   ParentName varchar(60) NOT NULL,
-  Parent_Add varchar(60) NOT NULL,
+  Parent_Add varchar(100) NOT NULL,
   ParentPrimaryOccu varchar(40) NOT NULL,
-  ParentOfficeAdd varchar(60) DEFAULT NULL,
+  ParentOfficeAdd varchar(100) DEFAULT NULL,
   ParentEduc char(10) NOT NULL,
   EthnoGroupPrt varchar(15) NOT NULL,
-  Parent_Income int NOT NULL,
+  Parent_Income varchar(10) NOT NULL,
   ITR_Year year NOT NULL,
   PRIMARY KEY (LRN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -99,6 +98,7 @@ CREATE TABLE degree_program (
   DegCode int NOT NULL AUTO_INCREMENT,
   DegLevel char(10) NOT NULL,
   DegreeProgram char(30) NOT NULL,
+  Duration int NOT NULL,
   PRIMARY KEY (DegCode),
   UNIQUE KEY DegCode_UNIQUE (DegCode)
 ) ENGINE=InnoDB AUTO_INCREMENT=4009 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -110,7 +110,7 @@ CREATE TABLE degree_program (
 
 LOCK TABLES degree_program WRITE;
 /*!40000 ALTER TABLE degree_program DISABLE KEYS */;
-INSERT INTO degree_program VALUES (4001,'Undergrad','BS Computer Science'),(4002,'Undergrad','BS Electronic Engineering'),(4003,'Undergrad','BS Mathematics'),(4004,'Masters','MA Computer Science'),(4005,'Masters','MS Data Science'),(4006,'Masters','MS Accountancy'),(4007,'Phd','DP in Computer Science'),(4008,'Phd','DP in Data Science');
+INSERT INTO degree_program VALUES (4001,'Undergrad','BS Computer Science', 4),(4002,'Undergrad','BS Electronic Engineering', 4),(4003,'Undergrad','BS Mathematics', 4),(4004,'Masters','MA Computer Science', 4),(4005,'Masters','MS Data Science', 4),(4006,'Masters','MS Accountancy', 4),(4007,'Phd','DP in Computer Science', 4),(4008,'Phd','DP in Data Science', 4);
 /*!40000 ALTER TABLE degree_program ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ DROP TABLE IF EXISTS educ_bg;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE educ_bg (
   LRN bigint NOT NULL,
-  Educ_Background char(3) NOT NULL,
+  Educ_Background char(10) NOT NULL,
   SchoolCode int NOT NULL,
   Year_Grad year NOT NULL,
   Ave_Grade float NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE schooldetails (
   School_Code int NOT NULL,
   School_Name varchar(60) NOT NULL,
   School_Address varchar(60) NOT NULL,
-  School_Type char(10) NOT NULL,
+  School_Type char(15) NOT NULL,
   SchoolLevel char(10) NOT NULL,
   PRIMARY KEY (School_Code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -197,7 +197,7 @@ CREATE TABLE schooldetails (
 
 LOCK TABLES schooldetails WRITE;
 /*!40000 ALTER TABLE schooldetails DISABLE KEYS */;
-INSERT INTO schooldetails VALUES (1,'University of the Philippines Diliman','Diliman, Quezon City, Metro Manila','SUC Main','TERTIARY'),(19,'Polytechnic University of the Philippines Manila','Anonas Street, Sta. Mesa, Manila','SUC Main','TERTIARY'),(125,'De La Salle University Manila','2401 Taft Avenue, Manila','Private','TERTIARY'),(1579,'De La Salle–College of Saint Benilde','2401 Taft Avenue, Manila','Private','TERTIARY'),(104006,'New Era University','Central, Quezon City','Private','TERTIARY'),(136640,'Sto. Nino Elementary School','Bagong Silang Caloocan','Public','ELEM'),(136687,'Sto. Nino Elementary School','Sto. Nino, Marikina City','Public','ELEM'),(136753,'Fourth Estate Elementary School','Fourth Estate, Paranaque City','Public','ELEM'),(301442,'San Jose National High School','Montalban, Rizal','Public','HS'),(305381,'Bagong Silang High School','Bagong Silang Caloocan','Public','HS'),(305389,'Caloocan Business High School','Urduja Caloocan','Public','HS'),(305405,'Sta. Elena High School','Sta. Elena, Marikina City','Public','HS'),(320201,'Paranaque Science High School','Sto. Nino, Paranaque City','Public','HS'),(403107,'Sta. Cecilia Parochial School','San Mateo, Rizal','Public','ELEMHS'),(406324,'National Teachers College','Quiapo, Manila','Private','TERTIARY'),(425665,'Gentle Kiddie Learning Academy','Montalban, Rizal','Private','ELEM'),(478012,'Philippine Institute of Quezon City','Banawe, Quezon City','Private','ELEMHS');
+INSERT INTO schooldetails VALUES (1,'University of the Philippines Diliman','Diliman, Quezon City, Metro Manila','SUC Main','TERTIARY'),(19,'Polytechnic University of the Philippines Manila','Anonas Street, Sta. Mesa, Manila','SUC Main','TERTIARY'),(125,'De La Salle University Manila','2401 Taft Avenue, Manila','Private','TERTIARY'),(1579,'De La Salle–College of Saint Benilde','2401 Taft Avenue, Manila','Private','TERTIARY'),(104006,'New Era University','Central, Quezon City','Private','TERTIARY'),(136640,'Sto. Nino Elementary School','Bagong Silang Caloocan','Public','ELEM'),(136687,'Sto. Nino Elementary School','Sto. Nino, Marikina City','Public','ELEM'),(136753,'Fourth Estate Elementary School','Fourth Estate, Paranaque City','Public','ELEM'),(301442,'San Jose National High School','Montalban, Rizal','Public','HS'),(305381,'Bagong Silang High School','Bagong Silang Caloocan','Public','HS'),(305389,'Caloocan Business High School','Urduja Caloocan','Public','HS'),(305405,'Sta. Elena High School','Sta. Elena, Marikina City','Public','HS'),(320201,'Paranaque Science High School','Sto. Nino, Paranaque City','Public','HS'),(403107,'Sta. Cecilia Parochial School','San Mateo, Rizal','Public','ELEMHS'),(406324,'National Teachers College','Quiapo, Manila','Private','TERTIARY'),(425665,'Gentle Kiddie Learning Academy','Montalban, Rizal','Private','ELEM'),(478012,'Philippine Institute of Quezon City','Banawe, Quezon City','Private','ELEMHS'), (89,	'University of the Philippines Los Baños',	'Los Banos, Laguna',	'SUC Satellite',	'TERTIARY');
 /*!40000 ALTER TABLE schooldetails ENABLE KEYS */;
 UNLOCK TABLES;
 
