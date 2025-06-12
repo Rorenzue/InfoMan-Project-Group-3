@@ -2,8 +2,8 @@
     // Database configuration
     $servername = "localhost";
     $username = "root";
-    $password = ""; // **Security Note**: Store passwords securely (e.g., in environment variables)
-    $dbname = "scholarship";
+    $password = "polo0210"; // **Security Note**: Store passwords securely (e.g., in environment variables)
+    $dbname = "maindb";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 

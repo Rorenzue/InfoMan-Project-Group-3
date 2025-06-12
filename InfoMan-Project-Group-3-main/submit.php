@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_application'])
         if (!filter_var($_SESSION['EmailAdd'], FILTER_VALIDATE_EMAIL)) {
             throw new Exception("Invalid email format");
         }
-        if (!preg_match('/^\d{12}$/', $_SESSION['LRN'])) { // Assuming LRN is a 12-digit number
+        if (!preg_match('/^\d{12}$/', $_SESSION['LRN'])) {
             throw new Exception("Invalid LRN format");
         }
 
@@ -190,74 +190,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_application'])
         }
         $stmt1->close();
 
-// Insert into educ_bg
-$educ_levels = ['ES', 'JHS', 'SHS', 'UDG', 'MT'];
-$sql2 = "INSERT INTO educ_bg (LRN, Educ_Background, SchoolCode, Year_Grad, Ave_Grade, ranking)
-         VALUES (?, ?, ?, ?, ?, ?)";
-$stmt2 = $conn->prepare($sql2);
-if (!$stmt2) {
-    throw new Exception("Prepare failed for educ_bg: " . $conn->error);
-}
-
-$valid_rankings = ['Highest', 'High', 'Honors', 'NA', ''];
-
-foreach ($educ_levels as $level) {
-    $school_name = $_SESSION["School_Name_" . $level] ?? '';
-    if (empty($school_name)) continue;
-
-    // Retrieve and validate ranking
-    $ranking = $_SESSION["Ranking_" . $level] ?? 'NA';
-    if (!in_array($ranking, $valid_rankings)) {
-        error_log("Invalid ranking for $level: $ranking");
-        throw new Exception("Invalid ranking for $level: $ranking");
-    }
-
-    // Log for debugging
-    error_log("Inserting for $level - Ranking: '$ranking'");
-
-    $school_code = null;
-    $school_query = $conn->prepare("SELECT School_Code FROM schooldetails WHERE school_name = ?");
-    if ($school_query) {
-        $school_query->bind_param("s", $school_name);
-        $school_query->execute();
-        $school_query->store_result();
-        $school_query->bind_result($school_code_result);
-
-        if ($school_query->num_rows > 0 && $school_query->fetch()) {
-            $school_code = (int)$school_code_result;
-        } else {
-            throw new Exception("School not found: $school_name");
-        }
-        $school_query->close();
-    }
-
-    if ($school_code !== null) {
-        $lrn = (int)($_SESSION["LRN"] ?? 0);
-        $educ_background = $level;
-        $year_grad = $_SESSION["Year_Grad_" . $level] ?? '';
-        $ave_grade = (float)($_SESSION["Ave_Grade_" . $level] ?? 0.0);
-
-        // Validate data
-        if ($lrn === 0) {
-            throw new Exception("Invalid LRN for $level");
-        }
-        if (!in_array($educ_background, $educ_levels)) {
-            throw new Exception("Invalid education level: $level");
-        }
-        if (!empty($year_grad) && !preg_match('/^\d{4}$/', $year_grad)) {
-            throw new Exception("Invalid graduation year for $level");
-        }
-        if ($ave_grade < 0 || $ave_grade > 100) {
-            throw new Exception("Invalid average grade for $level");
+        // Insert into educ_bg
+        $educ_levels = ['ES', 'JHS', 'SHS', 'UDG', 'MT'];
+        $sql2 = "INSERT INTO educ_bg (LRN, Educ_Background, SchoolCode, Year_Grad, Ave_Grade, ranking)
+                 VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        if (!$stmt2) {
+            throw new Exception("Prepare failed for educ_bg: " . $conn->error);
         }
 
-        $stmt2->bind_param("isisds", $lrn, $educ_background, $school_code, $year_grad, $ave_grade, $ranking);
-        if (!$stmt2->execute()) {
-            throw new Exception("Error inserting into educ_bg for level $level: " . $stmt2->error);
+        $valid_rankings = ['Highest', 'High', 'Honors', 'NA', ''];
+
+        foreach ($educ_levels as $level) {
+            $school_name = $_SESSION["School_Name_" . $level] ?? '';
+            if (empty($school_name)) continue;
+
+            // Retrieve and validate ranking
+            $ranking = $_SESSION["Ranking_" . $level] ?? 'NA';
+            if (!in_array($ranking, $valid_rankings)) {
+                error_log("Invalid ranking for $level: $ranking");
+                throw new Exception("Invalid ranking for $level: $ranking");
+            }
+
+            // Log for debugging
+            error_log("Inserting for $level - Ranking: '$ranking'");
+
+            $school_code = null;
+            $school_query = $conn->prepare("SELECT School_Code FROM schooldetails WHERE school_name = ?");
+            if ($school_query) {
+                $school_query->bind_param("s", $school_name);
+                $school_query->execute();
+                $school_query->store_result();
+                $school_query->bind_result($school_code_result);
+
+                if ($school_query->num_rows > 0 && $school_query->fetch()) {
+                    $school_code = (int)$school_code_result;
+                } else {
+                    throw new Exception("School not found: $school_name");
+                }
+                $school_query->close();
+            }
+
+            if ($school_code !== null) {
+                $lrn = (int)($_SESSION["LRN"] ?? 0);
+                $educ_background = $level;
+                $year_grad = $_SESSION["Year_Grad_" . $level] ?? '';
+                $ave_grade = (float)($_SESSION["Ave_Grade_" . $level] ?? 0.0);
+
+                // Validate data
+                if ($lrn === 0) {
+                    throw new Exception("Invalid LRN for $level");
+                }
+                if (!in_array($educ_background, $educ_levels)) {
+                    throw new Exception("Invalid education level: $level");
+                }
+                if (!empty($year_grad) && !preg_match('/^\d{4}$/', $year_grad)) {
+                    throw new Exception("Invalid graduation year for $level");
+                }
+                if ($ave_grade < 0 || $ave_grade > 100) {
+                    throw new Exception("Invalid average grade for $level");
+                }
+
+                $stmt2->bind_param("isisds", $lrn, $educ_background, $school_code, $year_grad, $ave_grade, $ranking);
+                if (!$stmt2->execute()) {
+                    throw new Exception("Error inserting into educ_bg for level $level: " . $stmt2->error);
+                }
+            }
         }
-    }
-}
-$stmt2->close();
+        $stmt2->close();
 
         // Insert into applidetails
         $income_bracket = $_SESSION["Parent_Income"] ?? '';
@@ -401,7 +401,7 @@ if (isset($conn)) {
         }
 
         .modal h2 {
-            color: #28a745;
+            color: #007bff;
             margin-bottom: 15px;
         }
 
@@ -410,19 +410,31 @@ if (isset($conn)) {
             line-height: 1.5;
         }
 
-        .ok-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
+        .confirm-btn, .cancel-btn {
             padding: 10px 30px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 15px;
+            margin: 10px 5px;
         }
 
-        .ok-btn:hover {
-            background-color: #0056b3;
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #218838;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #c82333;
         }
 
         .error-message {
@@ -496,7 +508,7 @@ if (isset($conn)) {
 
             <div class="form-card">
                 <?php if ($error_message): ?>
-                    <div class="error-message">
+                    <div class="error-message" id="errorMessage">
                         <?php echo htmlspecialchars($error_message); ?>
                     </div>
                 <?php endif; ?>
@@ -872,17 +884,27 @@ if (isset($conn)) {
                     </div>
                 </section>
 
-                <!-- Educational Background and Degree Preference sections would go here -->
-                <!-- Truncated for brevity, but would display session data similarly -->
-
-                <form method="post" action="">
+                <form id="applicationForm" method="post" action="">
+                    <input type="hidden" name="submit_application" value="1">
                     <div class="button-group">
                         <button type="button" class="back-btn" onclick="window.location.href='preference.php'">Back</button>
-                        <button type="submit" name="submit_application" class="submit-btn">Submit Application</button>
+                        <button type="button" class="submit-btn" onclick="showConfirmModal()">Submit Application</button>
                     </div>
                 </form>
             </div>
         </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Submission</h2>
+            <p>Are you sure you want to submit your application? Once submitted, changes cannot be made.</p>
+            <div>
+                <button type="button" class="confirm-btn" onclick="submitApplication()">Confirm</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
     </div>
 
     <!-- Success Modal -->
@@ -890,42 +912,129 @@ if (isset($conn)) {
         <div class="modal-content">
             <h2>Congratulations!</h2>
             <p>You have successfully submitted your application.</p>
-            <p>For further updates, kindly check your e-mail. Good luck!</p>
-            <button type="button" class="ok-btn" onclick="redirectToIndex()">OK</button>
+            <p>For further updates, kindly check your email. Good luck!</p>
+            <button type="button" class="confirm-btn" onclick="redirectToIndex()">OK</button>
         </div>
     </div>
 
-   <script>
-        // Function to show the modal
-        function showSuccessModal() {
-            const modal = document.getElementById('successModal');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+    <script>
+        // Function to show the confirmation modal
+        function showConfirmModal() {
+            const modal = document.getElementById('confirmModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                console.error('Confirmation modal element not found');
+            }
         }
 
-        // Function to hide the modal and redirect
-        function closeModalAndRedirect() {
+        // Function to close the confirmation modal
+        function closeModal() {
+            const modal = document.getElementById('confirmModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+
+        // Function to show the success modal
+        function showSuccessModal() {
             const modal = document.getElementById('successModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                console.error('Success modal element not found');
+            }
+        }
+
+        // Function to redirect to index.php
+        function redirectToIndex() {
+            const modal = document.getElementById('successModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
             window.location.href = 'index.php';
         }
 
-        // Show modal if submission was successful
-        <?php if ($success_message): ?>
-            showSuccessModal();
-        <?php endif; ?>
+        // Function to submit the form via AJAX
+        function submitApplication() {
+            const form = document.getElementById('applicationForm');
+            const formData = new FormData(form);
+            const errorMessageDiv = document.getElementById('errorMessage');
 
-        // Add event listener to OK button
-        document.getElementById('okButton').addEventListener('click', closeModalAndRedirect);
+            fetch('', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                closeModal();
+                if (data.success) {
+                    showSuccessModal();
+                } else {
+                    if (errorMessageDiv) {
+                        errorMessageDiv.textContent = data.error || 'Application submission failed. Please try again.';
+                        errorMessageDiv.style.display = 'block';
+                    } else {
+                        const newErrorDiv = document.createElement('div');
+                        newErrorDiv.className = 'error-message';
+                        newErrorDiv.id = 'errorMessage';
+                        newErrorDiv.textContent = data.error || 'Application submission failed. Please try again.';
+                        form.parentNode.insertBefore(newErrorDiv, form);
+                    }
+                    document.body.style.overflow = 'auto';
+                }
+            })
+            .catch(error => {
+                closeModal();
+                if (errorMessageDiv) {
+                    errorMessageDiv.textContent = 'An error occurred: ' + error.message;
+                    errorMessageDiv.style.display = 'block';
+                } else {
+                    const newErrorDiv = document.createElement('div');
+                    newErrorDiv.className = 'error-message';
+                    newErrorDiv.id = 'errorMessage';
+                    newErrorDiv.textContent = 'An error occurred: ' + error.message;
+                    form.parentNode.insertBefore(newErrorDiv, form);
+                }
+                document.body.style.overflow = 'auto';
+                console.error('Submission error:', error);
+            });
+        }
 
-        // Prevent modal from closing when clicking outside
+        // Prevent modals from closing when clicking outside
+        document.getElementById('confirmModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+
         document.getElementById('successModal').addEventListener('click', function(event) {
             if (event.target === this) {
                 event.preventDefault();
                 event.stopPropagation();
             }
         });
+
+        // Output JSON response for AJAX
+        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_application'])): ?>
+            <?php
+            header('Content-Type: application/json');
+            if ($success_message) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'error' => $error_message]);
+            }
+            exit;
+            ?>
+        <?php endif; ?>
+
+        // Debug: Log when page loads
+        console.log('Page loaded, modals initialized');
     </script>
 </body>
 </html>
