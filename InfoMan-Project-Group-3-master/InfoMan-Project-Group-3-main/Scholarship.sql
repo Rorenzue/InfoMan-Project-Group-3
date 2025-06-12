@@ -27,6 +27,7 @@ CREATE TABLE appli_details (
   LRN bigint NOT NULL,
   Assistance_Type char(15) NOT NULL,
   Assistance_Applied varchar(15) NOT NULL,
+  Status char(10),
   PRIMARY KEY (Appli_Num),
   UNIQUE KEY Appli_Num_UNIQUE (Appli_Num),
   KEY LRN_idx (LRN),

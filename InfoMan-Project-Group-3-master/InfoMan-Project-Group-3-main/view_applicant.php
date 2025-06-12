@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
                 ad.Appli_Num,
                 ad.Assistance_Type,
                 MAX(CASE 
-                    WHEN eb.Educ_Background = 'Elementary' 
+                    WHEN eb.Educ_Background = 'ES' 
                     THEN CONCAT_WS('|', s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking)
                 END) as Elementary_Details,
                 MAX(CASE 

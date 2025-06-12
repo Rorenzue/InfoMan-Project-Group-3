@@ -263,7 +263,7 @@ $masterschoice = getSchoolChoices($conn, "schoollevel = 'TERTIARY'");
                             <span class="required"></span>
                         </div>
                         <div class="form-group">
-                            <input type="number" name="Ave_Grade_UDG" min="75" max="100" step="0.01" placeholder="Average Grade" 
+                            <input type="number" name="Ave_Grade_UDG" min="1" max="5" step="0.01" placeholder="Average Grade" 
                              value="<?= isset($_SESSION["Ave_Grade_UDG"]) ? htmlspecialchars($_SESSION["Ave_Grade_UDG"]) : '' ?>">
                             <span class="required"></span>
                         </div>
@@ -298,7 +298,7 @@ $masterschoice = getSchoolChoices($conn, "schoollevel = 'TERTIARY'");
                             <span class="required"></span>
                         </div>
                         <div class="form-group">
-                            <input type="number" name="Ave_Grade_MT" min="75" max="100" step="0.01" placeholder="Average Grade" 
+                            <input type="number" name="Ave_Grade_MT" min="1" max="5" step="0.01" placeholder="Average Grade" 
                             value="<?= isset($_SESSION["Ave_Grade_MT"]) ? htmlspecialchars($_SESSION["Ave_Grade_MT"]) : '' ?>">
                             <span class="required"></span>
                         </div>
