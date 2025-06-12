@@ -905,7 +905,7 @@ if (isset($conn)) {
                 <!-- Educational Background and Degree Preference sections would go here -->
                 <!-- Truncated for brevity, but would display session data similarly -->
 
-                <form method="post" action="">
+                <form method="post" action="submit.php" id="applicationForm">
                     <input type="hidden" name="submit_application" value="1">
                     <div class="button-group">
                         <button type="button" class="back-btn" onclick="window.location.href='preference.php'">Back</button>

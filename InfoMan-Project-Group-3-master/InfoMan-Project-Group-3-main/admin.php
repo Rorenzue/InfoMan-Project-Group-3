@@ -214,6 +214,12 @@
                 alert('An error occurred while updating status');
             });
         }
+
+        function confirmLogout() {
+            if (confirm("Are you sure you want to logout?")) {
+                window.location.href = "login.php";
+            }
+        }
     </script>
     <style>
         .action-buttons {
@@ -324,6 +330,29 @@
             background-color: #dc3545;
             color: white;
         }
+
+        .logout-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-btn {
+            background-color: #FFCD5F;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color:rgb(163, 15, 15);
+        }
     </style>
 </head>
 <body>
@@ -378,6 +407,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="logout-container">
+        <a href="#" onclick="confirmLogout()" class="logout-btn">Logout</a>
     </div>
 </body>
 </html>
