@@ -92,7 +92,7 @@
                     <div class="icon-container">
                         <img src="src/img_icon.svg" alt="Student icon" class="card-icon">
                     </div>
-                    <h3>Incoming College<br>Masters, or PHD Student</h3>
+                    <h3>Incoming College,<br>Masters, or PHD Student</h3>
                     <p>The applicant<br>must be an incoming<br>college, masters, or PHD student.</p>
                 </div>
                 <div class="eligibility-card">

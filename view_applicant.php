@@ -1,69 +1,63 @@
 <?php
-// Fix the path by using the correct directory separator
 require_once __DIR__ . '/includes/db_connection.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die("No applicant ID provided");
 }
 
-// Validate and sanitize input
+// Sanitize input
 $appli_num = filter_var($_GET['id'], FILTER_VALIDATE_INT);
 if ($appli_num === false) {
     die("Invalid applicant ID: " . htmlspecialchars($_GET['id']));
 }
 
-// Verify database connection
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
-// Log the Appli_Num for debugging
 error_log("Processing Appli_Num: " . $appli_num);
 
-// Fetch applicant details from multiple tables
 $query = "SELECT 
             ap.*,
             ad.Appli_Num,
             ad.Assistance_Type,
-            MAX(CASE 
-                WHEN eb.Educ_Background = 'ES' 
-                THEN CONCAT_WS('|', s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking)
-            END) as Elementary_Details,
-            MAX(CASE 
-                WHEN eb.Educ_Background = 'JHS' 
-                THEN CONCAT_WS('|', s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking)
-            END) as JHS_Details,
-            MAX(CASE 
-                WHEN eb.Educ_Background = 'SHS' 
-                THEN CONCAT_WS('|', s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking)
-            END) as SHS_Details,
+
+            CONCAT_WS('|', s_es.School_Name, eb_es.Year_Grad, eb_es.Ave_Grade, eb_es.ranking) AS Elementary_Details,
+            CONCAT_WS('|', s_jhs.School_Name, eb_jhs.Year_Grad, eb_jhs.Ave_Grade, eb_jhs.ranking) AS JHS_Details,
+            CONCAT_WS('|', s_shs.School_Name, eb_shs.Year_Grad, eb_shs.Ave_Grade, eb_shs.ranking) AS SHS_Details,
+
             GROUP_CONCAT(
-                IF(pl.PrioNum = 1, 
-                    CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), 
-                    NULL
-                )
-            ) as First_Choice,
+                IF(pl.PrioNum = 1, CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), NULL)
+            ) AS First_Choice,
             GROUP_CONCAT(
-                IF(pl.PrioNum = 2, 
-                    CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), 
-                    NULL
-                )
-            ) as Second_Choice,
+                IF(pl.PrioNum = 2, CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), NULL)
+            ) AS Second_Choice,
             GROUP_CONCAT(
-                IF(pl.PrioNum = 3, 
-                    CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), 
-                    NULL
-                )
-            ) as Third_Choice
-         FROM appli_details ad
-         LEFT JOIN appli_profile ap ON ad.LRN = ap.LRN
-         LEFT JOIN educ_bg eb ON ap.LRN = eb.LRN
-         LEFT JOIN schooldetails s ON eb.SchoolCode = s.School_Code
-         LEFT JOIN prioritylist pl ON ad.Appli_Num = pl.Appli_Num
-         LEFT JOIN schooldetails s2 ON pl.School_Code = s2.School_Code
-         LEFT JOIN degree_program dp ON pl.DegCode = dp.DegCode
-         WHERE ad.Appli_Num = ?
-         GROUP BY ad.Appli_Num, ad.Assistance_Type, ap.LRN";
+                IF(pl.PrioNum = 3, CONCAT_WS('|', s2.School_Name, dp.DegreeProgram), NULL)
+            ) AS Third_Choice
+
+        FROM appli_details ad
+        LEFT JOIN appli_profile ap ON ad.LRN = ap.LRN
+
+        LEFT JOIN educ_bg eb_es ON ap.LRN = eb_es.LRN AND eb_es.Educ_Background = 'ES'
+        LEFT JOIN schooldetails s_es ON eb_es.SchoolCode = s_es.School_Code
+
+        LEFT JOIN educ_bg eb_jhs ON ap.LRN = eb_jhs.LRN AND eb_jhs.Educ_Background = 'JHS'
+        LEFT JOIN schooldetails s_jhs ON eb_jhs.SchoolCode = s_jhs.School_Code
+
+        LEFT JOIN educ_bg eb_shs ON ap.LRN = eb_shs.LRN AND eb_shs.Educ_Background = 'SHS'
+        LEFT JOIN schooldetails s_shs ON eb_shs.SchoolCode = s_shs.School_Code
+
+        LEFT JOIN educ_bg eb_udg ON ap.LRN = eb_udg.LRN AND eb_udg.Educ_Background = 'UDG'
+     LEFT JOIN schooldetails s_udg ON eb_udg.SchoolCode = s_udg.School_Code
+
+        LEFT JOIN prioritylist pl ON ad.Appli_Num = pl.Appli_Num
+        LEFT JOIN schooldetails s2 ON pl.School_Code = s2.School_Code
+        LEFT JOIN degree_program dp ON pl.DegCode = dp.DegCode
+
+        WHERE ad.Appli_Num = ?
+        GROUP BY ad.Appli_Num, ad.Assistance_Type, ap.LRN";
+
 
 try {
     $stmt = $conn->prepare($query);
@@ -71,25 +65,24 @@ try {
         error_log("Query preparation failed: " . $conn->error);
         die("Query preparation failed: " . $conn->error);
     }
-    
+
     $stmt->bind_param("i", $appli_num);
     $stmt->execute();
     $result = $stmt->get_result();
     error_log("Rows returned: " . $result->num_rows);
     $applicant = $result->fetch_assoc();
-    
-    // Clean up
+
     $stmt->close();
 } catch (Exception $e) {
     error_log("Error executing query: " . $e->getMessage());
     die("Error executing query: " . $e->getMessage());
 }
 
-// Add error checking after fetching data
 if (!$applicant) {
     die("Applicant not found for Appli_Num: " . $appli_num);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

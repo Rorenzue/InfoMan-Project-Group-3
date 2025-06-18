@@ -125,7 +125,7 @@ $masterschoice = getSchoolChoices($conn, "schoollevel = 'TERTIARY'");
             </div>
 
             <div class="form-card">
-                <p class="required-text">Fields marked with a red asterisk (<span class="required">*</span>) are required.</p>
+                <p class="required-text">Fields marked with a red asterisk (<span class="required">*</span>) are required.<br> <strong>Note:</strong> Please fill in your educational background up to the level just below what you're applying for.</p>
                 <form method="POST" action="educbackground.php">
                     <div class="form-row">
                         <div class="form-group full-width">
