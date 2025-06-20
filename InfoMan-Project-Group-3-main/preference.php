@@ -19,8 +19,8 @@ $_SESSION["Third_Degree_Choice"] = $_POST["Third_Degree_Choice"];
 
 $servername = "localhost";
 $username = "root";
-$password = "polo0210";
-$dbname = "main database";
+$password = "";
+$dbname = "scholarship";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {

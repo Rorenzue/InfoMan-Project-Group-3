@@ -39,8 +39,8 @@ if (isset($_POST["next2"]) || isset($_POST["back1"])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "polo0210";
-$dbname = "main database";
+$password = "";
+$dbname = "scholarship";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {

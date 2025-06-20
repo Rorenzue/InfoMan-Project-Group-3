@@ -303,6 +303,32 @@ if (!$applicant) {
             $elementary_details = explode('|', $applicant['Elementary_Details'] ?? '||||');
             $jhs_details = explode('|', $applicant['JHS_Details'] ?? '||||');
             $shs_details = explode('|', $applicant['SHS_Details'] ?? '||||');
+
+            // Fetch Undergraduate details
+            $udg_query = "SELECT s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking
+                          FROM educ_bg eb
+                          LEFT JOIN schooldetails s ON eb.SchoolCode = s.School_Code
+                          WHERE eb.LRN = ? AND eb.Educ_Background = 'UDG'
+                          LIMIT 1";
+            $udg_stmt = $conn->prepare($udg_query);
+            $udg_stmt->bind_param("i", $applicant['LRN']);
+            $udg_stmt->execute();
+            $udg_stmt->bind_result($udg_school, $udg_year, $udg_grade, $udg_rank);
+            $udg_stmt->fetch();
+            $udg_stmt->close();
+
+            // Fetch Master's details
+            $mt_query = "SELECT s.School_Name, eb.Year_Grad, eb.Ave_Grade, eb.ranking
+                          FROM educ_bg eb
+                          LEFT JOIN schooldetails s ON eb.SchoolCode = s.School_Code
+                          WHERE eb.LRN = ? AND eb.Educ_Background = 'MT'
+                          LIMIT 1";
+            $mt_stmt = $conn->prepare($mt_query);
+            $mt_stmt->bind_param("i", $applicant['LRN']);
+            $mt_stmt->execute();
+            $mt_stmt->bind_result($mt_school, $mt_year, $mt_grade, $mt_rank);
+            $mt_stmt->fetch();
+            $mt_stmt->close();
             ?>
             
             <!-- Elementary School -->
@@ -365,6 +391,48 @@ if (!$applicant) {
                 <div class="info-field">
                     <div class="info-label">Ranking</div>
                     <div class="info-value"><?php echo htmlspecialchars($shs_details[3] ?? 'Not provided'); ?></div>
+                </div>
+            </div>
+
+            <!-- Undergraduate -->
+            <h3 class="subsection-title">Undergraduate</h3>
+            <div class="info-grid">
+                <div class="info-field">
+                    <div class="info-label">School Name</div>
+                    <div class="info-value"><?php echo htmlspecialchars($udg_school ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Year Graduated</div>
+                    <div class="info-value"><?php echo htmlspecialchars($udg_year ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Average Grade</div>
+                    <div class="info-value"><?php echo htmlspecialchars($udg_grade ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Ranking</div>
+                    <div class="info-value"><?php echo htmlspecialchars($udg_rank ?? 'Not provided'); ?></div>
+                </div>
+            </div>
+
+            <!-- Master's Degree -->
+            <h3 class="subsection-title">Master's Degree</h3>
+            <div class="info-grid">
+                <div class="info-field">
+                    <div class="info-label">School Name</div>
+                    <div class="info-value"><?php echo htmlspecialchars($mt_school ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Year Graduated</div>
+                    <div class="info-value"><?php echo htmlspecialchars($mt_year ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Average Grade</div>
+                    <div class="info-value"><?php echo htmlspecialchars($mt_grade ?? 'Not provided'); ?></div>
+                </div>
+                <div class="info-field">
+                    <div class="info-label">Ranking</div>
+                    <div class="info-value"><?php echo htmlspecialchars($mt_rank ?? 'Not provided'); ?></div>
                 </div>
             </div>
         </div>

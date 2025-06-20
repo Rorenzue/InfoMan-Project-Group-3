@@ -4,8 +4,8 @@ session_start();
 // Database configuration
 $servername = "localhost";
 $username = "root";
-$password = "polo0210"; // **Security Note**: Store passwords securely (e.g., in environment variables)
-$dbname = "main database";
+$password = ""; // **Security Note**: Store passwords securely (e.g., in environment variables)
+$dbname = "scholarship";
 
 // Initialize variables
 $success_message = false;

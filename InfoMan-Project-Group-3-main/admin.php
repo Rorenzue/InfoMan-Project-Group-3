@@ -2,8 +2,8 @@
     // Database configuration
     $servername = "localhost";
     $username = "root";
-    $password = "polo0210"; 
-    $dbname = "main database";
+    $password = ""; 
+    $dbname = "scholarship";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
